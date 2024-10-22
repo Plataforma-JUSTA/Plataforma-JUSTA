@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'JUSTA Data',
+  title: 'JUSTA Dados',
   description: 'Visualização de dados do JUSTA.',
 };
 
