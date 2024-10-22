@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
+<svg
+   height="500"
+   width="500"
+   version="1.1"
+   id="Layer_1"
+   viewBox="0 0 320 320"
+   xml:space="preserve"
+   sodipodi:docname="state-funnel.svg"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs33" /><sodipodi:namedview
+   id="namedview31"
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1.0"
+   inkscape:pageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   showgrid="false"
+   inkscape:snap-global="false"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0"
+   inkscape:zoom="1.206468"
+   inkscape:cx="239.95663"
+   inkscape:cy="268.13807"
+   inkscape:window-width="1846"
+   inkscape:window-height="1016"
+   inkscape:window-x="74"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+
+
+
+
+
+
+
+
+
+
+<g
+   id="g940"
+   transform="translate(9.930625,26.305625)"><path
+     id="path2"
+     style="fill:#4d003a;fill-opacity:1;stroke-width:1"
+     d="M 8.8275008,0 C 3.9524992,0 0,3.95375 0,8.8287502 0,13.70375 3.9524992,17.65625 8.8275008,17.65625 L 123.58625,141.2425 h 52.965 L 291.31,17.65625 c 4.875,0 8.82775,-3.9515 8.82875,-8.8274998 C 300.13875,3.95375 296.18625,0 291.31125,0 Z" /><path
+     id="path6"
+     style="opacity:0.7;fill:#4d003a;stroke-width:1"
+     d="m 123.58625,142.5225 12.2375,114.23125 h 28.4875 l 12.24,-114.23125 z" /><path
+     id="path1350"
+     style="opacity:0.4;fill:#4d003a;stroke-width:1"
+     d="m 135.82375,258.03375 0.1575,1.4675 c 0.481,4.486 4.2665,7.8875 8.7775,7.8875 h 10.6175 c 4.511,0 8.2975,-3.4025 8.7775,-7.8875 l 0.1575,-1.4675 z" /></g></svg>

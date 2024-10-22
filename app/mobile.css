@@ -1,0 +1,127 @@
+/*
+ Here are key widths to consider:
+
+ * 375px: This is the width of an iPhone 12/13/14 in portrait mode, one of the most common screen sizes.
+ * 414px: This is the width of larger phones like the iPhone 12/13/14 Pro Max.
+ * 360px: Common for many Android devices (like Google Pixel 5 and Samsung Galaxy S21).
+*/
+
+@media (max-width: 640px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+
+  #content {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .header {
+    flex-wrap: wrap;
+
+    #logo {
+      margin: auto;
+    }
+
+    select {
+      width: 100%;
+      margin-left: 0;
+      padding: 16px 0;
+      margin-top: 48px;
+    }
+
+    li a {
+      padding: 32px 0;
+    }
+  }
+
+  .banner-content {
+    flex-direction: column;
+  }
+
+  .banner .left {
+    max-width: 100%;
+  }
+
+  .banner .left > div {
+    text-align: center;
+    margin: 32px 0;
+  }
+
+  .banner .left p {
+    margin: 0;
+    margin-bottom: 16px;
+    padding: 0;
+    min-height: 0;
+  }
+
+  #download-summary-container {
+    margin: 16px 0;
+  }
+
+  #download-summary {
+    margin: auto;
+  }
+
+  #in-practice > div {
+    flex-direction: column;
+  }
+
+  .in-practice-text {
+    width: 100%;
+  }
+
+  .drop-down {
+    width: 90%;
+  }
+
+  #first-map {
+    position: relative;
+    top: auto;
+    right: auto;
+  }
+
+  #state-box {
+    left: 50% !important;
+    top: 0;
+    margin-left: -225px;
+    border: 2px solid var(--justaGrey);
+    width: 470px;
+    overflow: auto;
+  }
+
+  .actions {
+    max-height: 420px;
+  }
+
+  #first-section-tabs {
+    display: flex;
+    padding: 16px;
+    padding-top: 0;
+    gap: 16px;
+
+    button {
+      border-radius: 16px;
+      color: var(--otherWhite);
+      background: var(--justaMediumBlue);
+      flex: 1;
+      padding: 16px;
+      border: 2px solid transparent;
+
+      &.enabled {
+        border-color: var(--otherWhite);
+      }
+    }
+  }
+
+  .map-help {
+    bottom: 16px;
+    right: 16px;
+    top: auto;
+    left: auto;
+  }
+
+  .is-ios .dots {
+    font-size: 12px;
+  }
+}

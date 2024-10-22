@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="470.00003"
+   height="504"
+   viewBox="0 0 124.35417 133.35"
+   version="1.1"
+   id="svg1340"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="funnel.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1342"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:snap-global="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.75187991"
+     inkscape:cx="339.8149"
+     inkscape:cy="100.41497"
+     inkscape:window-width="2486"
+     inkscape:window-height="1016"
+     inkscape:window-x="74"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     units="px" />
+  <defs
+     id="defs1337" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-8.1137161,-8.7359009)">
+    <path
+       id="path148"
+       style="opacity:1;fill:#090446;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0171126"
+       d="M 8.1137166,30.960901 V 50.06229 L 57.049774,86.557664 V 142.0859 H 70.473857 83.532193 V 86.884244 L 132.46789,50.06229 V 30.960901 H 70.473857 Z"
+       sodipodi:nodetypes="ccccccccccc" />
+    <rect
+       style="opacity:1;fill:#090446;fill-opacity:1;stroke-width:0.55229;stroke:none"
+       id="rect1279"
+       width="124.35416"
+       height="17.991667"
+       x="8.1137161"
+       y="8.7359009"
+       rx="0"
+       ry="0" />
+  </g>
+</svg>
