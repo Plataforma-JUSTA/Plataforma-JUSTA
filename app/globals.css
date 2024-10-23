@@ -1074,9 +1074,9 @@ iframe {
 }
 
 .in-practice-text {
-  font-size: var(--fontSizeMedium);
+  font-size: var(--fontSizeLarge);
   color: var(--otherWhite);
-  padding: 8px;
+  padding: 4px;
   display: block;
   box-sizing: border-box;
   text-align: center;
