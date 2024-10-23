@@ -562,6 +562,7 @@ h1 {
 .column-text svg {
   cursor: pointer;
   display: inline-block;
+  opacity: 1 !important;
 }
 
 .column + .column {
@@ -798,7 +799,7 @@ iframe {
 }
 
 .animate-jump {
-  animation: moveUpDown 1s ease-in-out infinite;
+  animation: moveUpDown 0.7s ease-in-out infinite;
 }
 
 @keyframes moveUpDown {
@@ -806,7 +807,7 @@ iframe {
     transform: translateY(0);  /* Initial position */
   }
   50% {
-    transform: translateY(-3px);  /* Move up 5px */
+    transform: translateY(-5px);  /* Move up 5px */
   }
 }
 

@@ -450,7 +450,7 @@ export default function Home() {
                   <BsPercent className="big-icon" />
                   <div className="column-text">
                     <Markdown>{data.summary.column2}</Markdown>
-                    <div style={{ textAlign: 'right' }}>{ data.table.title && <GoLinkExternal title="Ver tabela" onClick={() => { setModalOpened('two-columns'); }} /> }</div>
+                    <div style={{ textAlign: 'right' }}>{ data.table.title && <GoLinkExternal className="animate-jump" title="Ver tabela" onClick={() => { setModalOpened('two-columns'); }} /> }</div>
                   </div>
                 </div>
                 <div ref={myRef2} />
