@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Tooltip } from 'react-tooltip';
+import { Modal } from 'react-responsive-modal';
+import { GoLinkExternal } from 'react-icons/go';
+import Markdown from 'react-markdown';
 import $ from 'jquery';
 import Counter from './counter';
 
@@ -14,29 +17,46 @@ const splitData = (data) => {
 const SubBars = ({ labels, captions, values, maxValue, showPercentages, useGradient }) => {
   const orderedValues = values.slice().sort((a, b) => (a - b));
   const id = Math.floor(Math.random() * 1000000);
+  const [modalContent, setModalContent] = useState(null);
+  const myRef = useRef(null);
 
   return (
     <div className="sub-bars">
       {values.map((value, index) => {
         const percentage = `${(value * 100 / maxValue).toFixed(1)}%`;
         const opacity = (useGradient ? Math.max((value / orderedValues.slice(-1)).toFixed(2), 0.2) : 1.0);
+        let caption = captions[index];
+        let modal = null;
+        if (/ \[([^\]]+)\]$/.test(caption)) {
+          modal = caption.match(/( \[([^\]]+)\])$/);
+          caption = caption.replace(modal[1], '');
+          modal = modal[2];
+        }
 
         return (
            <div
              key={index}
-             className="sub-bar"
+             className={`sub-bar ${modal ? 'with-link' : 'without-link'}`}
              style={{ width: percentage, order: orderedValues.length - orderedValues.indexOf(value), background: `color-mix(in srgb, currentColor ${parseInt(opacity * 100, 10)}%, #EEE)` }}
              data-tooltip-id={`tooltip-${id}`}
              data-tooltip-place="top"
              data-tooltip-position-strategy="fixed"
-             data-tooltip-content={`${labels[index]}: ${captions[index]} (${percentage})`}
+             data-tooltip-content={`${labels[index]}: ${caption} (${percentage})`}
            >
              { showPercentages && <span className="sub-bar-percentage">{percentage}</span> }
+             { Boolean(modal) && <GoLinkExternal onClick={() => { setModalContent(modal); }} /> }
            </div>
          );
       })}
 
       <Tooltip id={`tooltip-${id}`} className="tooltip" opacity={1} />
+
+      <div ref={myRef} />
+      <Modal open={Boolean(modalContent)} onClose={() => { setModalContent(null); }} className="model" center container={myRef.current}>
+        <div className="description">
+          <Markdown>{modalContent}</Markdown>
+        </div>
+      </Modal>
     </div>
   );
 };

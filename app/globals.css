@@ -390,12 +390,28 @@ h1 {
   gap: 4px;
   background: var(--justaDarkBlue);
   overflow: hidden;
+
+  .react-responsive-modal-modal .description {
+    white-space: break-spaces;
+  }
 }
 
 .sub-bar {
   width: 25%;
   color: var(--justaDarkYellow);
   min-width: 5px;
+
+  &.with-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    svg {
+      color: var(--otherBlack);
+      font-size: var(--fontSizeLarger);
+    }
+  }
 }
 
 .sub-bar-percentage {
