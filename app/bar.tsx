@@ -22,7 +22,8 @@ const SubBars = ({ labels, captions, values, maxValue, showPercentages, useGradi
 
   return (
     <div className="sub-bars">
-      {values.map((value, index) => {
+      {orderedValues.slice().reverse().map((value) => {
+        const index = values.indexOf(value);
         const percentage = `${(value * 100 / maxValue).toFixed(1)}%`;
         const opacity = (useGradient ? Math.max((value / orderedValues.slice(-1)).toFixed(2), 0.2) : 1.0);
         let caption = captions[index];
@@ -37,7 +38,7 @@ const SubBars = ({ labels, captions, values, maxValue, showPercentages, useGradi
            <div
              key={index}
              className={`sub-bar ${modal ? 'with-link' : 'without-link'}`}
-             style={{ width: percentage, order: orderedValues.length - orderedValues.indexOf(value), background: `color-mix(in srgb, currentColor ${parseInt(opacity * 100, 10)}%, #EEE)` }}
+             style={{ width: percentage, background: `color-mix(in srgb, currentColor ${parseInt(opacity * 100, 10)}%, #EEE)` }}
              data-tooltip-id={`tooltip-${id}`}
              data-tooltip-place="top"
              data-tooltip-position-strategy="fixed"
