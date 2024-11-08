@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import $ from 'jquery';
 import * as d3 from 'd3';
 import { select } from 'd3-selection';
+import { addDotsToNumber } from './helpers';
 
 export default function CirclesChart({ values }) { // Values is a list of objects with numeric value and a label
   const svgRef = useRef(null);
@@ -50,7 +51,7 @@ export default function CirclesChart({ values }) { // Values is a list of object
       <svg ref={svgRef} width="420" height="100"></svg>
       <div className="labels">
         { values.map((object, i) => (
-          <div key={i} id={`label${i + 1}`} className={`label ${i === 0 ? 'first' : ''} ${i === values.length ? 'last' : ''}`}><strong>R$ {object.value}</strong><small>{object.label}</small></div>
+          <div key={i} id={`label${i + 1}`} className={`label ${i === 0 ? 'first' : ''} ${i === values.length ? 'last' : ''}`}><strong>R$ {addDotsToNumber(object.value)}</strong><small>{object.label}</small></div>
         ))}
       </div>
     </div>

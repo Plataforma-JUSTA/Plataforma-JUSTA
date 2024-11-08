@@ -5,7 +5,7 @@ import { HiArrowUturnDown, HiArrowUturnLeft, HiXMark } from 'react-icons/hi2';
 import TabChart from './tab_chart';
 import Bar from './bar';
 import { Barplot } from './bar_plot';
-import { ourParseFloat } from './helpers';
+import { ourParseFloat, addDotsToNumber } from './helpers';
 import CirclesChart from './circles_chart';
 import FadeIn from './fade_in';
 import DottedChart from './dotted_chart';
@@ -135,7 +135,7 @@ export default function StateBox({ show, state, description, allData, data, zoom
         { data.general.firstChart.values[0].value ?
           <>
             <div className="description">
-              {data.texts.home ? <Markdown>{data.texts.home}</Markdown> : <>Para cada <b>R$ {data.general.firstChart.values[0].value}</b> gastos com <b>polícias</b> e cada <b>R$ {data.general.firstChart.values[1].value}</b> gastos com o sistema <b>penitenciário</b>, <b>R$ {data.general.firstChart.values[2].value}</b> foi destinado a ações voltadas para <b>egressos e pessoas privadas de liberdade</b>.</>}
+              {data.texts.home ? <Markdown>{data.texts.home}</Markdown> : <>Para cada <b>R$ {addDotsToNumber(data.general.firstChart.values[0].value)}</b> gastos com <b>polícias</b> e cada <b>R$ {addDotsToNumber(data.general.firstChart.values[1].value)}</b> gastos com o sistema <b>penitenciário</b>, <b>R$ {addDotsToNumber(data.general.firstChart.values[2].value)}</b> foi destinado a ações voltadas para <b>egressos e pessoas privadas de liberdade</b>.</>}
             </div>
             <div className="circles-chart">
               <CirclesChart values={data.general.firstChart.values} />
