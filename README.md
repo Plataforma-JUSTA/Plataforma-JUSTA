@@ -1,4 +1,4 @@
-# JUSTA DataViz
+# JUSTA Dados
 
 Data visualization for JUSTA.
 
