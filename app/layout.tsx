@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Lato } from 'next/font/google';
 import { Suspense } from 'react';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import './mobile.css';
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Suspense>
           {children}
         </Suspense>
+        <GoogleAnalytics gaId="G-C1JPSZX3SY" />
       </body>
     </html>
   );
