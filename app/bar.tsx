@@ -14,7 +14,7 @@ const splitData = (data) => {
   };
 };
 
-const SubBars = ({ labels, captions, values, maxValue, showPercentages, useGradient }) => {
+const SubBars = ({ labels, captions, values, maxValue, showPercentages, percentages, useGradient }) => {
   const orderedValues = values.slice().sort((a, b) => (a - b));
   const id = Math.floor(Math.random() * 1000000);
   const [modalContent, setModalContent] = useState(null);
@@ -24,7 +24,12 @@ const SubBars = ({ labels, captions, values, maxValue, showPercentages, useGradi
     <div className="sub-bars">
       {orderedValues.slice().reverse().map((value) => {
         const index = values.indexOf(value);
-        const percentage = `${(value * 100 / maxValue).toFixed(1)}%`;
+        let percentageValue = (value * 100 / maxValue).toFixed(1);
+        const realPercentage = percentageValue;
+        if (percentages && percentages[index]) {
+          percentageValue = percentages[index];
+        }
+        const percentage = `${percentageValue}%`;
         const opacity = (useGradient ? Math.max((value / orderedValues.slice(-1)).toFixed(2), 0.2) : 1.0);
         let caption = captions[index];
         let modal = null;
@@ -38,7 +43,7 @@ const SubBars = ({ labels, captions, values, maxValue, showPercentages, useGradi
            <div
              key={index}
              className={`sub-bar ${modal ? 'with-link' : 'without-link'}`}
-             style={{ width: percentage, background: `color-mix(in srgb, currentColor ${parseInt(opacity * 100, 10)}%, #EEE)` }}
+             style={{ width: `${realPercentage}%`, background: `color-mix(in srgb, currentColor ${parseInt(opacity * 100, 10)}%, #EEE)` }}
              data-tooltip-id={`tooltip-${id}`}
              data-tooltip-place="top"
              data-tooltip-position-strategy="fixed"
@@ -62,7 +67,7 @@ const SubBars = ({ labels, captions, values, maxValue, showPercentages, useGradi
   );
 };
 
-export default function Bar({ id, index, maxWidth, minWidth, maxValue, value, label, caption, className, showPercentages, suffix, useGradient, convertLabelToCounter }) {
+export default function Bar({ id, index, maxWidth, minWidth, maxValue, value, label, caption, className, showPercentages, percentages, suffix, useGradient, convertLabelToCounter }) {
   let mainLabel = label;
   let mainCaption = caption;
   let mainValue = parseInt(value, 10);
@@ -81,7 +86,7 @@ export default function Bar({ id, index, maxWidth, minWidth, maxValue, value, la
     ({ main: mainValue, other: values } = splitData(value));
     mainValue = parseInt(mainValue.toString(), 10);
     values = values.map(value => parseInt(value.toString(), 10));
-    subBars = (<SubBars labels={labels} captions={captions} values={values} maxValue={mainValue} showPercentages={showPercentages} useGradient={useGradient} />);
+    subBars = (<SubBars labels={labels} captions={captions} values={values} maxValue={mainValue} showPercentages={showPercentages} useGradient={useGradient} percentages={percentages} />);
   }
 
   if (!maxValue) {

@@ -36,6 +36,7 @@ export default function StateBox({ show, state, description, allData, data, zoom
   if (data.police) {
     data.police.firstChart = { ...data.police };
     const policeSecondChartData = [];
+    const percentages = [];
     const values = data.police.value.replace(/^[^=]+=/, '').split('+');
     const labels = data.police.label.replace(/^[^=]+=/, '').split('+');
     const total = values.reduce((accumulator, currentValue) => accumulator + parseFloat(currentValue), 0);
@@ -53,10 +54,11 @@ export default function StateBox({ show, state, description, allData, data, zoom
           }
         });
       }
-
+      percentages[i] = percentage;
       policeSecondChartData.push({ name: `${names[i]} (${percentage}%)`, value: (parseFloat(value) / 1000.0), tooltip: labels[i] });
     });
 
+    data.police.firstChart.percentages = percentages;
     data.police.secondChart = {
       title: 'Orçamento das polícias (bilhões de reais)',
       data: policeSecondChartData,
@@ -249,6 +251,7 @@ export default function StateBox({ show, state, description, allData, data, zoom
                 value={data.police.firstChart.value}
                 label={data.police.firstChart.label}
                 caption={data.police.firstChart.caption}
+                percentages={data.police.firstChart.percentages}
                 useGradient
               />
             </div>
