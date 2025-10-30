@@ -1,6 +1,6 @@
 # JUSTA Dados
 
-Data visualization for JUSTA.
+A data visualization tool for JUSTA.
 
 How to run locally: `npm run dev`.
 
