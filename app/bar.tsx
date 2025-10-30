@@ -15,23 +15,36 @@ const splitData = (data) => {
 };
 
 const SubBars = ({ labels, captions, values, maxValue, showPercentages, percentages, useGradient }) => {
-  const orderedValues = values.slice().sort((a, b) => (a - b));
+  const items = [];
+  for (let i = 0; i < values.length; i++) {
+    const item = {
+      index: i,
+      label: labels[i],
+      caption: captions[i],
+      value: values[i],
+    };
+    if (percentages && percentages[i]) {
+      item.percentage = percentages[i];
+    }
+    items.push(item);
+  }
+  const ordered = items.slice().sort((a, b) => (a.value - b.value));
   const id = Math.floor(Math.random() * 1000000);
   const [modalContent, setModalContent] = useState(null);
   const myRef = useRef(null);
 
   return (
     <div className="sub-bars">
-      {orderedValues.slice().reverse().map((value) => {
-        const index = values.indexOf(value);
+      {ordered.slice().reverse().map((item) => {
+        const value = item.value;
         let percentageValue = (value * 100 / maxValue).toFixed(1);
         const realPercentage = percentageValue;
-        if (percentages && percentages[index]) {
-          percentageValue = percentages[index];
+        if (item.percentage) {
+          percentageValue = item.percentage;
         }
         const percentage = `${percentageValue}%`;
-        const opacity = (useGradient ? Math.max((value / orderedValues.slice(-1)).toFixed(2), 0.2) : 1.0);
-        let caption = captions[index];
+        const opacity = (useGradient ? Math.max((value / ordered.slice(-1)[0].value).toFixed(2), 0.2) : 1.0);
+        let caption = item.caption;
         let modal = null;
         if (/ \[([^\]]+)\]$/.test(caption)) {
           modal = caption.match(/( \[([^\]]+)\])$/);
@@ -41,13 +54,13 @@ const SubBars = ({ labels, captions, values, maxValue, showPercentages, percenta
 
         return (
            <div
-             key={index}
+             key={item.index}
              className={`sub-bar ${modal ? 'with-link' : 'without-link'}`}
              style={{ width: `${realPercentage}%`, background: `color-mix(in srgb, currentColor ${parseInt(opacity * 100, 10)}%, #EEE)` }}
              data-tooltip-id={`tooltip-${id}`}
              data-tooltip-place="top"
              data-tooltip-position-strategy="fixed"
-             data-tooltip-content={`${labels[index]}: ${caption} (${percentage})`}
+             data-tooltip-content={`${item.label}: ${caption} (${percentage})`}
            >
              { showPercentages && <span className="sub-bar-percentage">{percentage}</span> }
              { Boolean(modal) && <GoLinkExternal onClick={() => { setModalContent(modal); }} /> }
@@ -57,7 +70,7 @@ const SubBars = ({ labels, captions, values, maxValue, showPercentages, percenta
 
       <Tooltip id={`tooltip-${id}`} className="tooltip" opacity={1} />
 
-      <div ref={myRef} />
+      { modalContent ? <div ref={myRef} /> : null }
       <Modal open={Boolean(modalContent)} onClose={() => { setModalContent(null); }} className="model" center container={myRef.current}>
         <div className="description">
           <Markdown>{modalContent}</Markdown>

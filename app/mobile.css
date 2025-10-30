@@ -124,4 +124,18 @@
   .is-ios .dots {
     font-size: 12px;
   }
+
+  #timeline {
+    display: block;
+
+    #timeline-description {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+  
+    h1, p {
+      margin: 16px 0;
+    }
+  }
 }

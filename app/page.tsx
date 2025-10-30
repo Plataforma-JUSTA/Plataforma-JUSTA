@@ -13,7 +13,8 @@ import Tabs from './tabs';
 import StatesChart from './states_chart';
 import Map from './map';
 import InPractice from './in_practice';
-import { ourParseFloat } from './helpers';
+import Timeline from './timeline';
+import { ourParseFloat, parseImageUrlsInText } from './helpers';
 
 const useCache = false;
 
@@ -114,7 +115,7 @@ export default function Home() {
       gapiClient.sheets.spreadsheets.values
         .batchGet({
           spreadsheetId: '1AIWdzmYw5IlHRB0imVkqYSnrE5-GW-Y5Qz-_XXAzenY',
-          ranges: [`(${y}) Dados Gerais!A2:H2`, `(${y}) Dados Gerais!A6:C`, `(${y}) Estados (barra lateral)!A1:Z`, `(${y}) Estados (detalhes)!A1:AJ`, `(${y}) Tabelas!A1:D`, `(${y}) Dados Gerais!E4:I7`, `(${y}) Tabelas!H1:L`],
+          ranges: [`(${y}) Dados Gerais!A2:H2`, `(${y}) Dados Gerais!A6:C`, `(${y}) Estados (barra lateral)!A1:Z`, `(${y}) Estados (detalhes)!A1:AJ`, `(${y}) Tabelas!A1:D`, `(${y}) Dados Gerais!E4:I7`, `(${y}) Tabelas!H1:L`, 'Linha do Tempo', 'Linha do Tempo (extra)'],
         })
         .then(
           response => {
@@ -298,7 +299,7 @@ export default function Home() {
                   newData.table.title = row[0];
                 }
                 else if (i === 1) {
-                  newData.table.description = row[0];
+                  newData.table.description = parseImageUrlsInText(row[0]);
                 }
                 else if (i === 2) {
                   newData.table.columns = row.slice();
@@ -309,6 +310,75 @@ export default function Home() {
                     tableRow[newData.table.columns[j]] = cell;
                   });
                   newData.table.rows.push(tableRow);
+                }
+              });
+            }
+
+            // Timeline
+            newData.timeline = {};
+            if (response.result.valueRanges[7].values) {
+              let timelineDatasets = [];
+              let timelineYears = [];
+              response.result.valueRanges[7].values.forEach((row, i) => {
+                if (i === 0) { // Global description
+                  newData.timeline.description = row[0];
+                }
+                else if (i === 1) { // Footer
+                  newData.timeline.footer = row[0];
+                }
+                else if (i === 2) { // Datasets
+                  timelineDatasets = row;
+                }
+                else if (i === 3) { // Years
+                  timelineYears = row.map(cell => parseInt(cell, 10));
+                }
+                else { // States
+                  let timelineState = null;
+                  row.forEach((cell, j) => {
+                    if (j === 0) {
+                      timelineState = row[0];
+                      newData.timeline[timelineState] = {};
+                    }
+                    else if (j === 1) {
+                      newData.timeline[timelineState].description = row[1];
+                    }
+                    else {
+                      const timelineDataset = timelineDatasets[j];
+                      const timelineYear = timelineYears[j];
+                      newData.timeline[timelineState][timelineDataset] ||= {};
+                      newData.timeline[timelineState][timelineDataset][timelineYear] = parseInt(cell, 10);
+                    }
+                  });
+                }
+              });
+            }
+
+            // Extra timeline data
+            newData.timelineExtra = {};
+            if (response.result.valueRanges[8].values) {
+              let timelineDatasets = [];
+              let timelineYears = [];
+              response.result.valueRanges[8].values.forEach((row, i) => {
+                if (i === 0) { // Datasets
+                  timelineDatasets = row;
+                }
+                else if (i === 1) { // Years
+                  timelineYears = row.map(cell => parseInt(cell, 10));
+                }
+                else { // States
+                  let timelineState = null;
+                  row.forEach((cell, j) => {
+                    if (j === 0) {
+                      timelineState = row[0];
+                      newData.timelineExtra[timelineState] = {};
+                    }
+                    else {
+                      const timelineDataset = timelineDatasets[j];
+                      const timelineYear = timelineYears[j];
+                      newData.timelineExtra[timelineState][timelineDataset] ||= {};
+                      newData.timelineExtra[timelineState][timelineDataset][timelineYear] = parseInt(cell, 10);
+                    }
+                  });
                 }
               });
             }
@@ -369,7 +439,7 @@ export default function Home() {
       const loaded = (dataset[year] && dataset[year].loaded);
       if (!loaded && useCache) {
         const cachedData = JSON.parse(localStorage.getItem('justaData'));
-        setData(cachedData);
+        setDataset(cachedData);
       } else if (!loaded && !useCache) {
         const { gapi } = require('gapi-script');
         gapi.load('client', () => {
@@ -484,6 +554,13 @@ export default function Home() {
                 </Modal>
               </div>
             )}
+            <section id="timeline">
+              <div id="timeline-description">
+                <h1>Evolução dos gastos</h1>
+                <Markdown>{data.timeline.description}</Markdown>
+              </div>
+              <Timeline stateData={data.timeline.Total} extraStateData={data.timelineExtra.Total} fontSize={16} showLegend footer={data.timeline.footer} />
+            </section>
             <section id="first-section">
               <h1>Dados orçamentários por UF</h1>
               { isMobile && (

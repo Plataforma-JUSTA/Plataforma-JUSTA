@@ -61,7 +61,7 @@ export const BarplotDatasetTransition = ({
     }
   }, [visible]);
 
-  const height = 800;
+  const height = 1050;
 
   const handleSelectDataPoint = (e) => {
     setSelectedDataPoint(e.target.value);

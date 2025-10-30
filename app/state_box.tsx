@@ -9,6 +9,7 @@ import { ourParseFloat, addDotsToNumber } from './helpers';
 import CirclesChart from './circles_chart';
 import FadeIn from './fade_in';
 import DottedChart from './dotted_chart';
+import Timeline from './timeline';
 import Actions from './actions';
 import StateFunnel from './state_funnel';
 import FunnelIcon from './funnel_icon';
@@ -49,7 +50,8 @@ export default function StateBox({ show, state, description, allData, data, zoom
       const stateInTable = allData.table.rows.find(row => row['Estado'].toLowerCase() === state.toLowerCase());
       if (stateInTable) {
         Object.keys(stateInTable).forEach((key) => {
-          if (key.toLowerCase().trim().match(names[i].toLowerCase().trim()) && /%/.test(stateInTable[key])) {
+          const currentName = names[i] || '';
+          if (key.toLowerCase().trim().match(currentName.toLowerCase().trim()) && /%/.test(stateInTable[key])) {
             percentage = stateInTable[key].match(/ \(([^%]+)%\)/)[1];
           }
         });
@@ -227,6 +229,13 @@ export default function StateBox({ show, state, description, allData, data, zoom
             </div>
           </>
         )}
+
+        {/* Timeline */}
+        <hr />
+        <div className="description smaller-description">
+          <Markdown>{allData.timeline[state].description || 'Evolução dos gastos com polícias, sistema prisional e políticas para egressos.'}</Markdown>
+        </div>       
+        <Timeline stateData={allData.timeline[state]} extraStateData={allData.timelineExtra[state]} showLegend={false} fontSize={12} footer={allData.timeline.footer} />
       </div>
 
       {/* Charts displayed when the first tab is clicked (Police) */}

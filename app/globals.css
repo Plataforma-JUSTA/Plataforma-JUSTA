@@ -13,12 +13,14 @@
   --justaDarkestYellow: #686300;
   --justaBlue: #09004F;
   --justaLightBlue: #9284F4;
+  --justaLighterBlue: #7262DF;
   --justaMediumBlue: #2E2A62;
   --justaDarkBlue: #090446;
   --justaDarkestBlue: #090048;
   --justaPurple: #4D003A;
   --justaGrey: #353535;
   --justaLightGrey: #D9D9D9;
+  --justaLighterGrey: #EEEEEE;
   --justaDarkGrey: #303030;
 
   /* Sizes */
@@ -608,6 +610,61 @@ iframe {
   margin-top: 32px;
 }
 
+/* Timeline */
+
+.timeline {
+  width: 100%;
+
+  canvas {
+    margin: 0 auto;
+    width: 100% !important;
+    min-height: 300px;
+  }
+}
+
+.timeline-footer {
+  font-size: var(--fontSizeSmaller);
+  text-align: center;
+  color: var(--justaGrey);
+  margin: 8px auto 0 auto;
+}
+
+#timeline {
+  display: flex;
+  position: relative;
+  background: var(--justaLighterGrey);
+  overflow: hidden;
+  border-radius: 16px;
+  margin-top: 32px;
+  padding: 0 16px 16px 16px;
+  width: 100%;
+
+  #timeline-description {
+    flex: 2;
+    margin: 16px 16px 0 0;
+    padding: 16px 16px 0 0;
+    border-right: 1px solid var(--justaLightGrey);
+
+    p {
+      font-size: var(--fontSizeLarge);
+      margin-top: 24px;
+    }
+  }
+
+  .timeline {
+    flex: 3;
+    margin-top: 16px;
+  }
+
+  h1, p {
+    color: var(--otherBlack);
+  }
+}
+
+#state-box .timeline canvas {
+  min-height: 200px;
+}
+
 /* States Chart */
 
 #first-section {
@@ -616,6 +673,7 @@ iframe {
   overflow: hidden;
   border-radius: 16px;
   margin-top: 32px;
+  height: 1300px;
 
   h1 {
     color: var(--otherWhite);
@@ -758,7 +816,7 @@ iframe {
   top: -195px;
   background: var(--otherWhite);
   border-left: 2px solid var(--justaGrey);
-  bottom: 0;
+  bottom: -305px;
   opacity: 0.95;
   padding: 16px;
   z-index: 4;
@@ -1201,4 +1259,12 @@ footer {
 
 .bar .counter span {
   display: inline;
+}
+
+.markdown-whitespace {
+  white-space: pre-wrap;
+}
+
+#ceará-general-third-chart {
+  max-width: 416px;
 }
